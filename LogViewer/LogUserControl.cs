@@ -70,6 +70,7 @@ namespace LogViewer
 				this.ListBoxLog.Margin.Left,
 				this.LabelLogName.Bottom + this.LabelLogName.Margin.Bottom + this.ListBoxLog.Margin.Top
 			);
+			this.ListBoxLog.HorizontalScrollbar = true;
 
 			//
 			// ButtonReadLog
