@@ -11,6 +11,10 @@ namespace LogViewer
 		protected ListBox ListBoxLog;
 		protected Button ButtonReadLog;
 
+		/// <summary>
+		/// A user-friendly name of the log.
+		/// Will be "Unnamed"/"unnamed" (depending on context) when not set.
+		/// </summary>
 		private string _LogName;
 		public string LogName {
 			get { return _LogName; }
@@ -24,6 +28,12 @@ namespace LogViewer
 			}
 		}
 
+		/// <summary>
+		/// The log file path.
+		/// Can be set to <code>null</code>, but the button to read the log in
+		/// will be disabled, and attempting to read the log programmatically
+		/// will throw an exception (see <see cref="ReadLog()"/>).
+		/// </summary>
 		private string _LogFilePath;
 		public string LogFilePath {
 			get { return _LogFilePath; }
@@ -104,6 +114,10 @@ namespace LogViewer
 			}
 		}
 
+		/// <summary>
+		/// Reads the log from <see cref="LogFilePath"/>, or throws an
+		/// <code>InvalidOperationException</code> if that is not set.
+		/// </summary>
 		public void ReadLog()
 		{
 			if (string.IsNullOrWhiteSpace(_LogFilePath))
