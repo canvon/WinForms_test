@@ -23,16 +23,21 @@ namespace LogViewer
 			);
 			this.LogUC1.LogName = "nonexistent";
 			this.LogUC1.LogFilePath = "/var/log/nonexistent.log";
-			this.LogUC1.ReadLogSafe();
 
 			//
 			// MainForm
 			//
 			this.Name = "MainForm";
 			this.Text = "LogViewer";
+			this.Shown += MainForm_Shown;
 
 			// Add controls to form.
 			this.Controls.Add(this.LogUC1);
+		}
+
+		void MainForm_Shown(object sender, EventArgs e)
+		{
+			this.LogUC1.ReadLogSafe();
 		}
 	}
 }
