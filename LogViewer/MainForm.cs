@@ -21,6 +21,8 @@ namespace LogViewer
 				this.LogUC1.Margin.Left,
 				this.LogUC1.Margin.Top
 			);
+			this.LogUC1.LogName = "syslog";
+			this.LogUC1.LogFilePath = "/var/log/syslog";
 
 			//
 			// MainForm
