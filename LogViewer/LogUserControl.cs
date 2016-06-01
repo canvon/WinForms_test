@@ -2,13 +2,14 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using System.Text;
 
 namespace LogViewer
 {
 	public class LogUserControl : UserControl
 	{
 		protected Label LabelLogName;
-		protected ListBox ListBoxLog;
+		protected RichTextBox RichTextBoxLog;
 		protected Button ButtonReadLog;
 
 		/// <summary>
@@ -39,7 +40,7 @@ namespace LogViewer
 			get { return _LogFilePath; }
 			set {
 				_LogFilePath = value;
-				this.ListBoxLog.Items.Clear();
+				this.RichTextBoxLog.Clear();
 				// TODO: Read log in immediately?
 				this.ButtonReadLog.Enabled = !string.IsNullOrWhiteSpace(_LogFilePath);
 			}
@@ -49,7 +50,7 @@ namespace LogViewer
 		{
 			// Create controls.
 			this.LabelLogName = new Label();
-			this.ListBoxLog = new ListBox();
+			this.RichTextBoxLog = new RichTextBox();
 			this.ButtonReadLog = new Button();
 
 			//
@@ -63,14 +64,14 @@ namespace LogViewer
 			);
 
 			//
-			// ListBoxLog
+			// RichTextBoxLog
 			//
-			this.ListBoxLog.Name = "ListBoxLog";
-			this.ListBoxLog.Location = new Point(
-				this.ListBoxLog.Margin.Left,
-				this.LabelLogName.Bottom + this.LabelLogName.Margin.Bottom + this.ListBoxLog.Margin.Top
+			this.RichTextBoxLog.Name = "RichTextBoxLog";
+			this.RichTextBoxLog.Location = new Point(
+				this.RichTextBoxLog.Margin.Left,
+				this.LabelLogName.Bottom + this.LabelLogName.Margin.Bottom + this.RichTextBoxLog.Margin.Top
 			);
-			this.ListBoxLog.HorizontalScrollbar = true;
+			this.RichTextBoxLog.ScrollBars = RichTextBoxScrollBars.Both;
 
 			//
 			// ButtonReadLog
@@ -79,7 +80,7 @@ namespace LogViewer
 			this.ButtonReadLog.Text = "Read log";
 			this.ButtonReadLog.Location = new Point(
 				this.ButtonReadLog.Margin.Left,
-				this.ListBoxLog.Bottom + this.ListBoxLog.Margin.Bottom + this.ButtonReadLog.Margin.Top
+				this.RichTextBoxLog.Bottom + this.RichTextBoxLog.Margin.Bottom + this.ButtonReadLog.Margin.Top
 			);
 			this.ButtonReadLog.Click += ButtonReadLog_Click;
 
@@ -89,7 +90,7 @@ namespace LogViewer
 
 			// Add controls to user control.
 			this.Controls.Add(this.LabelLogName);
-			this.Controls.Add(this.ListBoxLog);
+			this.Controls.Add(this.RichTextBoxLog);
 			this.Controls.Add(this.ButtonReadLog);
 
 			// Do post-layout that would not have been done
@@ -97,13 +98,13 @@ namespace LogViewer
 			// been layouted statically then, with seemingly
 			// magic size values in the code, which we don't
 			// have.  So do this.
-			this.ListBoxLog.Size = new Size(
-				this.ClientSize.Width - this.ListBoxLog.Left - this.ListBoxLog.Margin.Right,
+			this.RichTextBoxLog.Size = new Size(
+				this.ClientSize.Width - this.RichTextBoxLog.Left - this.RichTextBoxLog.Margin.Right,
 				this.ClientSize.Height
 				- this.LabelLogName.Bottom - this.LabelLogName.Margin.Bottom
 				- this.ButtonReadLog.Height - this.ButtonReadLog.Margin.Vertical
 			);
-			this.ListBoxLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
+			this.RichTextBoxLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
 				| AnchorStyles.Left | AnchorStyles.Right;
 			this.ButtonReadLog.Width = this.ClientSize.Width
 				- this.ButtonReadLog.Left - this.ButtonReadLog.Margin.Right;
@@ -164,19 +165,14 @@ namespace LogViewer
 			if (string.IsNullOrWhiteSpace(_LogFilePath))
 				throw new InvalidOperationException("Attempted reading log when no log file name was set");
 
-			try {
-				this.ListBoxLog.BeginUpdate();
-				this.ListBoxLog.Items.Clear();
-				using (StreamReader reader = new StreamReader(_LogFilePath)) {
-					while (!reader.EndOfStream)
-						this.ListBoxLog.Items.Add(reader.ReadLine());
-				}
+			this.RichTextBoxLog.Clear();
+			var builder = new StringBuilder();
+			using (StreamReader reader = new StreamReader(_LogFilePath)) {
+				while (!reader.EndOfStream)
+					builder.AppendLine(reader.ReadLine());
 			}
-			finally {
-				this.ListBoxLog.EndUpdate();
-			}
-
-			this.ListBoxLog.SelectedIndex = this.ListBoxLog.Items.Count - 1;
+			this.RichTextBoxLog.Text = builder.ToString();
+			this.RichTextBoxLog.SelectionStart = builder.Length;
 		}
 	}
 }
