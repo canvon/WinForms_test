@@ -23,7 +23,7 @@ namespace LogViewer
 			);
 			this.LogUC1.LogName = "nonexistent";
 			this.LogUC1.LogFilePath = "/var/log/nonexistent.log";
-			this.LogUC1.ReadLog();
+			this.LogUC1.ReadLogSafe();
 
 			//
 			// MainForm

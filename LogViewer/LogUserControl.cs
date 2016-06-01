@@ -96,6 +96,24 @@ namespace LogViewer
 			Cursor prevCursor = System.Windows.Forms.Cursor.Current;
 			try {
 				System.Windows.Forms.Cursor.Current = Cursors.WaitCursor;
+				ReadLogSafe();
+			}
+			finally {
+				System.Windows.Forms.Cursor.Current = prevCursor;
+			}
+		}
+
+		/// <summary>
+		/// Reads the log from <see cref="LogFilePath"/> safely, i.e.,
+		/// exceptions are caught and turned to a <c>MessageBox.Show()</c>
+		/// invocation. Success can still be determined, by looking at the
+		/// return value.
+		/// </summary>
+		/// <returns><c>true</c> if log was successfully read,
+		/// <c>false</c> otherwise.</returns>
+		public bool ReadLogSafe()
+		{
+			try {
 				ReadLog();
 			}
 			catch (Exception ex) {
@@ -107,11 +125,9 @@ namespace LogViewer
 					string.Format("{0} log", string.IsNullOrWhiteSpace(_LogName) ? "Unnamed" : _LogName),
 					MessageBoxButtons.OK, MessageBoxIcon.Error
 				);
-				return;
+				return false;
 			}
-			finally {
-				System.Windows.Forms.Cursor.Current = prevCursor;
-			}
+			return true;
 		}
 
 		/// <summary>
