@@ -90,6 +90,24 @@ namespace LogViewer
 			this.Controls.Add(this.LabelLogName);
 			this.Controls.Add(this.ListBoxLog);
 			this.Controls.Add(this.ButtonReadLog);
+
+			// Do post-layout that would not have been done
+			// by Designer-generated code; but it would have
+			// been layouted statically then, with seemingly
+			// magic size values in the code, which we don't
+			// have.  So do this.
+			this.ListBoxLog.Size = new Size(
+				this.ClientSize.Width - this.ListBoxLog.Left - this.ListBoxLog.Margin.Right,
+				this.ClientSize.Height
+				- this.LabelLogName.Bottom - this.LabelLogName.Margin.Bottom
+				- this.ButtonReadLog.Height - this.ButtonReadLog.Margin.Vertical
+			);
+			this.ListBoxLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
+				| AnchorStyles.Left | AnchorStyles.Right;
+			this.ButtonReadLog.Width = this.ClientSize.Width
+				- this.ButtonReadLog.Left - this.ButtonReadLog.Margin.Right;
+			this.ButtonReadLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
+				| AnchorStyles.Left | AnchorStyles.Right;
 		}
 
 		void ButtonReadLog_Click(object sender, EventArgs e)
