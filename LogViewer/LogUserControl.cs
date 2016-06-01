@@ -76,6 +76,7 @@ namespace LogViewer
 			// ButtonReadLog
 			//
 			this.ButtonReadLog.Name = "ButtonReadLog";
+			this.ButtonReadLog.Text = "Read log";
 			this.ButtonReadLog.Location = new Point(
 				this.ButtonReadLog.Margin.Left,
 				this.ListBoxLog.Bottom + this.ListBoxLog.Margin.Bottom + this.ButtonReadLog.Margin.Top
@@ -106,8 +107,13 @@ namespace LogViewer
 				| AnchorStyles.Left | AnchorStyles.Right;
 			this.ButtonReadLog.Width = this.ClientSize.Width
 				- this.ButtonReadLog.Left - this.ButtonReadLog.Margin.Right;
-			this.ButtonReadLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
+			this.ButtonReadLog.Anchor = AnchorStyles.Bottom
 				| AnchorStyles.Left | AnchorStyles.Right;
+
+
+			// Now do the non-WinForms initialization
+			LogName = null;
+			LogFilePath = null;
 		}
 
 		void ButtonReadLog_Click(object sender, EventArgs e)
