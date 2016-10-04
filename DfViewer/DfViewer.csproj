@@ -33,6 +33,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="MainForm.cs" />
+    <Compile Include="DfStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
