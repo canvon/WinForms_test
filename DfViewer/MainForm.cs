@@ -76,9 +76,13 @@ namespace DfViewer
 			}
 
 			// Draw a beam ourselves.
-			Rectangle rect = e.Bounds;
-			e.Graphics.FillRectangle(Brushes.Blue, rect);
-			e.Graphics.FillRectangle(Brushes.Aqua, Rectangle.Inflate(rect, -3, -3));
+			Rectangle inner = Rectangle.Inflate(e.Bounds, -3, -3);
+			e.Graphics.FillRectangle(Brushes.Blue, e.Bounds);
+			e.Graphics.FillRectangle(Brushes.Aqua, inner);
+
+			Rectangle amount = inner;
+			amount.Width = inner.Width * 400000 / 500000;
+			e.Graphics.FillRectangle(Brushes.White, amount);
 		}
 	}
 }
