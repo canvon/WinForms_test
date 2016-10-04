@@ -30,6 +30,7 @@ namespace DfViewer
 			//
 			this.Name = "MainForm";
 			this.Text = "df viewer";
+			this.Size = new Size(320, 240);
 
 			this.Controls.Add(listViewDfStatus);
 
