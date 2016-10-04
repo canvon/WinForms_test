@@ -85,8 +85,9 @@ namespace DfViewer
 			}
 
 			// Draw a beam ourselves.
-			Rectangle inner = Rectangle.Inflate(e.Bounds, -3, -3);
-			e.Graphics.FillRectangle(Brushes.Blue, e.Bounds);
+			Rectangle outer = e.Bounds;
+			Rectangle inner = Rectangle.Inflate(outer, -3, -3);
+			e.Graphics.FillRectangle(Brushes.Blue, outer);
 			e.Graphics.FillRectangle(Brushes.Aqua, inner);
 
 			var status = e.Item.Tag as DfStatus;
