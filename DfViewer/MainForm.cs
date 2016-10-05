@@ -20,9 +20,9 @@ namespace DfViewer
 			listViewDfStatus.Dock = DockStyle.Fill;
 			listViewDfStatus.OwnerDraw = true;
 			listViewDfStatus.Columns.Add("Path");
-			listViewDfStatus.Columns.Add("Size");
-			listViewDfStatus.Columns.Add("Used");
-			listViewDfStatus.Columns.Add("Free");
+			listViewDfStatus.Columns.Add("Size", 32, HorizontalAlignment.Right);
+			listViewDfStatus.Columns.Add("Used", 32, HorizontalAlignment.Right);
+			listViewDfStatus.Columns.Add("Free", 32, HorizontalAlignment.Right);
 			listViewDfStatus.Columns.Add("Beam");
 			listViewDfStatus.View = View.Details;
 
