@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace DfViewer
@@ -82,6 +83,23 @@ namespace DfViewer
 			this.DfSize = info.TotalSize / (1024 * 1024);
 			this.DfFree = info.TotalFreeSpace / (1024 * 1024);
 			this.DfUsed = this.DfSize - this.DfFree;
+		}
+
+
+		/// <summary>
+		/// Creates <see cref="DfStatus"/> instances for all known/mounted filesystems.
+		/// (I hope.)
+		/// </summary>
+		/// <returns>The df statuses.</returns>
+		public static IList<DfStatus> GetDfStatuses()
+		{
+			var ret = new List<DfStatus>();
+
+			foreach (DriveInfo info in DriveInfo.GetDrives()) {
+				ret.Add(new DfStatus(info.Name));
+			}
+
+			return ret;
 		}
 	}
 }
