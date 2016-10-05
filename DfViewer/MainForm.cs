@@ -59,9 +59,9 @@ namespace DfViewer
 			foreach (DfStatus status in dfStatuses) {
 				var item = new ListViewItem(new string[] {
 					status.FilesystemPath,
-					status.DfSize.ToString(),
-					status.DfUsed.ToString(),
-					status.DfFree.ToString(),
+					status.DfSize.ToString("N0"),
+					status.DfUsed.ToString("N0"),
+					status.DfFree.ToString("N0"),
 					"XXXXXX"
 				});
 				item.Tag = status;
