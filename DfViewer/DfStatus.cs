@@ -81,8 +81,8 @@ namespace DfViewer
 
 			var info = new DriveInfo(this.FilesystemPath);
 			this.DfSize = info.TotalSize / (1024 * 1024);
-			this.DfFree = info.TotalFreeSpace / (1024 * 1024);
-			this.DfUsed = this.DfSize - this.DfFree;
+			this.DfFree = info.AvailableFreeSpace / (1024 * 1024);
+			this.DfUsed = this.DfSize - info.TotalFreeSpace / (1024 * 1024);
 		}
 
 
