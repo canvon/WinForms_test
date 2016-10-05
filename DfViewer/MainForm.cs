@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -44,11 +45,15 @@ namespace DfViewer
 
 		public void LoadDfStatuses()
 		{
+			#if false
 			var dfStatuses = new DfStatus[] {
 				new DfStatus("/", 500000, 400000, 100000),
 				new DfStatus("/dev", 10, 1, 9),
 				new DfStatus("/boot", 500, 200, 300),
 			};
+			#else
+			IList<DfStatus> dfStatuses = DfStatus.GetDfStatuses();
+			#endif
 
 			listViewDfStatus.Items.Clear();
 			foreach (DfStatus status in dfStatuses) {
