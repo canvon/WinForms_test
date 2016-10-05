@@ -31,7 +31,7 @@ namespace DfViewer
 			//
 			this.Name = "MainForm";
 			this.Text = "df viewer";
-			this.Size = new Size(320, 240);
+			this.Size = new Size(360, 240);
 
 			this.Controls.Add(listViewDfStatus);
 
@@ -62,11 +62,14 @@ namespace DfViewer
 					status.DfSize.ToString(),
 					status.DfUsed.ToString(),
 					status.DfFree.ToString(),
-					string.Empty
+					"XXXXXX"
 				});
 				item.Tag = status;
 				listViewDfStatus.Items.Add(item);
 			}
+
+			// Make sure the data can actually be seen by the user.
+			listViewDfStatus.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 		}
 
 		void ListViewDfStatus_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
