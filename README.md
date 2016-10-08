@@ -22,6 +22,9 @@ Windows Forms (on Mono on GNU/Linux) test/proof-of-concept experiments
   * Try out ListView OwnerDraw, by writing a graphical viewer for
     df ("disk free") status.
 
+  * For screenshots, see [DfViewer development history on the Wiki](
+    https://github.com/canvon/WinForms_test/wiki/DfViewer_history).
+
 
 ## Contact
 
